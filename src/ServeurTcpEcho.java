@@ -14,30 +14,15 @@ public class ServeurTcpEcho {
     }
 
     public void lancerServeur () throws IOException {
-        String line;
+
         ServerSocket sockServeur = new ServerSocket();
         Socket sockClient;
 
         sockServeur.bind(new InetSocketAddress(this.port));
         for (int i = 1; i <= nbClients; i++) {
             sockClient = sockServeur.accept();
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(
-                    sockClient.getInputStream()));
-
-            BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
-                    sockClient.getOutputStream()));
-
-            while (true) {
-                line = br.readLine();
-                if (line == null || line.equals("quit")) break;
-                bw.write(line.toUpperCase());
-                bw.newLine();
-                bw.flush();
-            }
-            br.close();
-            bw.close();
-            sockClient.close();
+            ThreadServeurEcho thread = new ThreadServeurEcho(sockClient);
+            thread.start();
         }
         sockServeur.close();
     }
