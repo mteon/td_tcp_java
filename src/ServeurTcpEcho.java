@@ -3,10 +3,13 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class ServeurTcpEcho {
     private int port;
     private int nbClients;
+    private ExecutorService pool = Executors.newFixedThreadPool(nbClients);
 
     public ServeurTcpEcho(int myPort, int client) {
         this.port = myPort;
@@ -22,7 +25,7 @@ public class ServeurTcpEcho {
         for (int i = 1; i <= nbClients; i++) {
             sockClient = sockServeur.accept();
             ThreadServeurEcho thread = new ThreadServeurEcho(sockClient);
-            thread.start();
+            pool.execute(thread);
         }
         sockServeur.close();
     }
