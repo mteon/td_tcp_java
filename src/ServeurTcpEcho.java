@@ -9,7 +9,7 @@ import java.util.concurrent.Executors;
 public class ServeurTcpEcho {
     private int port;
     private int nbClients;
-    private ExecutorService pool = Executors.newFixedThreadPool(nbClients);
+    private ExecutorService pool = Executors.newFixedThreadPool(this.nbClients);
 
     public ServeurTcpEcho(int myPort, int client) {
         this.port = myPort;
