@@ -1,8 +1,7 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.util.Scanner;
 
 public class ClientTcpEcho {
     private String hostname;
@@ -14,16 +13,30 @@ public class ClientTcpEcho {
     }
 
     public void lancerClient() throws IOException {
-        String line;
-
+        String line = "";
         Socket sockClient = new Socket();
+
         sockClient.connect(new InetSocketAddress(this.hostname, this.port));
+
         BufferedReader br = new BufferedReader(new InputStreamReader(
                 sockClient.getInputStream()));
-        while ((line = br.readLine()) != null)
-            System.out.println(line);
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+                sockClient.getOutputStream()));
+
+        while (true) {
+            Scanner sc = new Scanner(System.in);
+            line = sc.nextLine();
+            if(line.equals("quit")) break;
+            bw.write(line);
+            bw.newLine();
+            bw.flush();
+            String received = br.readLine();
+            System.out.println(received);
+        }
+
+
         br.close();
-        if (line.contains("quit"))
-            sockClient.close();
+        bw.close();
+        sockClient.close();
     }
 }
