@@ -4,7 +4,7 @@ import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.Socket;
 
-public class ThreadServeurEcho extends Thread {
+public class ThreadServeurEcho extends Thread { //can also Implement Runnable
 
     Socket socketclient;
 

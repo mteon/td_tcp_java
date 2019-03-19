@@ -8,7 +8,7 @@ public class Main {
                 serveur.lancerServeur();
                 break;
             case "client" :
-                ClientTcpEcho clientTcpEcho = new ClientTcpEcho(50007,"10.203.9.156");
+                ClientTcpEcho clientTcpEcho = new ClientTcpEcho(50007,"10.203.9.155");
                 clientTcpEcho.lancerClient();
         }
     }
