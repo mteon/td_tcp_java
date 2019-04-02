@@ -1,8 +1,8 @@
 import java.io.IOException;
 
 public class Main {
-    public static void main (String[] args) throws IOException {
-        switch (args[0]){
+    public static void main(String[] args) throws IOException {
+        /* switch (args[0]){
             case "serveur" :
                 ServeurTcpEcho serveur = new ServeurTcpEcho(50007, 500);
                 serveur.lancerServeur();
@@ -15,10 +15,18 @@ public class Main {
                 ClientSmtp clientSmtp = new ClientSmtp(25,"martin", "139.124.187.23");
                 clientSmtp.sendMail("martin", "martin", "Test", "JE SUIS LE TEST"); */
 
-            case "client" :
+            /* case "client" :
                 ClientPOP3 clientPOP3 = new ClientPOP3(110,"139.124.187.23");
-                clientPOP3.recupMail("martin", "martin");
+                clientPOP3.recupMail("martin", "martin"); */
+
+            /* case "client" :
+                TaskClientFichier client = new TaskClientFichier("10.203.9.88", 2000);
+                client.run();
         }
     }
 
+} */
+        TaskClientFichier client = new TaskClientFichier("10.203.9.88", 2000);
+        client.run();
+    }
 }
